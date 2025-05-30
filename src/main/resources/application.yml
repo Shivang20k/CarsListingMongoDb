@@ -1,0 +1,5 @@
+spring:
+  data:
+    mongodb:
+      database: CarsListingAndOwners
+      uri: mongodb+srv://root:root@mongoatlasintegrationpr.eejvqhs.mongodb.net/?retryWrites=true&w=majority&appName=MongoAtlasIntegrationProject
