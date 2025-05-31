@@ -38,4 +38,9 @@ public class APIController {
     public ResponseEntity<List<Cars>> searchTextFromAnyWhereInPayload(@PathVariable String text) {
         return new ResponseEntity<>(carsService.findAnyWhereInPayload(text), HttpStatus.OK);
     }
+
+    @GetMapping("/findAllFeaturesFromAllCars")
+    public ResponseEntity<Cars> findAllFeaturesFromAllCars() {
+        return new ResponseEntity<>(carsService.findAllFeaturesFromAllCars(), HttpStatus.OK);
+    }
 }

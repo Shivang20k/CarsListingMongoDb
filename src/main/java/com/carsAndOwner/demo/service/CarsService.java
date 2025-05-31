@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.bson.Document;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.convert.MongoConverter;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ public class CarsService implements CustomCarRepository {
     @Autowired
     private MongoTemplate mongoTemplate;
 
+    //MongoDb atlas Aggregation from MongoDb Atlas WebUI Tool
     @Override
     public List<Cars> findAnyWhereInPayload(String text) {
         List<Cars> cars = new ArrayList<>();
@@ -49,5 +52,17 @@ public class CarsService implements CustomCarRepository {
         }
 
         return cars;
+    }
+
+
+    //Criteria API
+    @Override
+    public Cars findAllFeaturesFromAllCars() {
+        Query query = new Query();
+        Criteria criteria1 = new Criteria("features").exists(true);
+        query.addCriteria(criteria1.andOperator(
+                Criteria.where("features").is("Alloys")));
+        List<Cars> cars = mongoTemplate.find(query, Cars.class);
+        return cars.get(0);
     }
 }

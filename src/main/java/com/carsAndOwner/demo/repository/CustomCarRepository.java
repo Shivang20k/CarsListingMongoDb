@@ -7,4 +7,6 @@ import java.util.List;
 public interface CustomCarRepository {
 
     public List<Cars> findAnyWhereInPayload(String text);
+
+    public Cars findAllFeaturesFromAllCars();
 }
