@@ -2,8 +2,7 @@ package com.carsAndOwner.demo.controller;
 
 import com.carsAndOwner.demo.entity.Cars;
 import com.carsAndOwner.demo.repository.CarsRepository;
-import lombok.extern.log4j.Log4j;
-import lombok.extern.log4j.Log4j2;
+import com.carsAndOwner.demo.service.CarsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +19,9 @@ public class APIController {
     @Autowired
     CarsRepository carsRepository;
 
+    @Autowired
+    CarsService carsService;
+
     @GetMapping("/cars")
     public ResponseEntity<List<Cars>> getAllCars() {
         List<Cars> cars = carsRepository.findAll();
@@ -30,5 +32,10 @@ public class APIController {
     public ResponseEntity<String> postCars(@RequestBody Cars cars) {
         carsRepository.save(cars);
         return new ResponseEntity<>(cars.toString(), HttpStatus.OK);
+    }
+
+    @PostMapping("/searchTextFromAnyWhereInPayload/{text}")
+    public ResponseEntity<List<Cars>> searchTextFromAnyWhereInPayload(@PathVariable String text) {
+        return new ResponseEntity<>(carsService.findAnyWhereInPayload(text), HttpStatus.OK);
     }
 }
