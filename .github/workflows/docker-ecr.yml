@@ -47,11 +47,15 @@ jobs:
           echo "IMAGE_TAG: ${{ github.sha }}"
           
           #authenticate
-          aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.ECR_REGISTRY }}
-    
+          #aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.ECR_REGISTRY }}
+          aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 908027373703.dkr.ecr.eu-north-1.amazonaws.com
+          
           # Build and tag the image
-          docker build -t $ECR_REPOSITORY .
-          docker tag $ECR_REPOSITORY:latest $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          #docker build -t $ECR_REPOSITORY .
+          #docker tag $ECR_REPOSITORY:latest $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          docker build -t cars-listing-app .
+          docker tag cars-listing-app:latest 908027373703.dkr.ecr.eu-north-1.amazonaws.com/cars-listing-app:latest
           
           # Push the image
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          #docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          docker push 908027373703.dkr.ecr.eu-north-1.amazonaws.com/cars-listing-app:latest
