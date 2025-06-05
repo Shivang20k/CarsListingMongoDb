@@ -51,7 +51,7 @@ jobs:
     
           # Build and tag the image
           docker build -t $ECR_REPOSITORY .
-          docker tag $ECR_REPOSITORY:latest $IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          docker tag $ECR_REPOSITORY:latest $ECR_REGISTRY/$ECR_REPOSITORY:latest
           
           # Push the image
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
