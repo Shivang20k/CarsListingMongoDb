@@ -42,6 +42,9 @@ jobs:
           ECR_REPOSITORY=${{ secrets.ECR_REPOSITORY }}
           IMAGE_TAG=${{ github.sha }}
           
+          #authenticate
+          aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.ECR_REGISTRY }}
+    
           # Build and tag the image
           docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
           docker tag $ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
