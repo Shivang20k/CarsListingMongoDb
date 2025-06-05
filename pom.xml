@@ -99,6 +99,6 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>CarsListingMongoDb</finalName>
 	</build>
-
 </project>
